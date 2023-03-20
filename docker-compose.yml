@@ -73,13 +73,13 @@ services:
     - netbox-redis-cache-data:/data
   #Next App
   network-web:
-    image: network-web-docker:latest
+    image: ssenchyna/network-web-docker:latest
     env_file: env/network-web.env
     ports:
       - "3000:3000"
       
   network-api:
-    image: network-api-docker:latest
+    image: ssenchyna/network-api-docker:latest
     env_file: env/network-web.env
     ports:
       - "8081:8081"
