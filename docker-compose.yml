@@ -77,14 +77,35 @@ services:
     env_file: env/network-web.env
     ports:
       - "3000:3000"
-      
+  #Network API
   network-api:
     image: ssenchyna/network-api-docker:latest
     env_file: env/network-web.env
     ports:
       - "8081:8081"
+  #Mongodb
+  # To login into mongo container shell
+  # docker exec -it mongodb bash
+  # mongosh
+  mongodb:
+    image : mongo
+    container_name: mongodb
+    #Creates User and Group that can create the mapped volumes that can be accesible outside of root
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - mongo-volume:/data/db
+      - mongodb-config:/data/configdb
+    ports:
+      - 27017:27017
+    restart: unless-stopped
 
 volumes:
+  mongo-volume:
+    driver: local
+  mongodb-config:
+    driver: local
   netbox-media-files:
     driver: local
   netbox-postgres-data:
