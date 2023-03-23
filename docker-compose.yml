@@ -73,16 +73,25 @@ services:
     - netbox-redis-cache-data:/data
   #Next App
   network-web:
-    image: ssenchyna/network-web-docker:latest
+    container_name: network-web
+    image: ssenchyna/network-web:latest
     env_file: env/network-web.env
     ports:
       - "3000:3000"
   #Network API
   network-api:
-    image: ssenchyna/network-api-docker:latest
+    container_name: network-api
+    image: ssenchyna/network-api:latest
     env_file: env/network-web.env
     ports:
       - "8081:8081"
+  #Syslog Server
+  syslog:
+    container_name: syslog
+    image: ssenchyna/syslog:latest
+    env_file: env/syslog.env
+    ports:
+      - "514:514/udp"
   #Mongodb
   # To login into mongo container shell
   # docker exec -it mongodb bash

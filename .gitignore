@@ -15,3 +15,4 @@ prometheus.yml
 super-linter.log
 network-api.env
 network-web.env
+syslog.env
